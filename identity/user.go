@@ -30,8 +30,8 @@ func (u *User) add(ver *VerifierData, idn *IdentityData) {
 		}
 	}
 
-	if idn != nil && idn.Name != "" && idn.Identity != "" {
-		i := 0
+	i := 0
+	if len(u.Identities) != 0 {
 		for i < len(u.Verifiers) {
 			id := u.Identities[i]
 			if id.Identity == idn.Identity && id.Name == idn.Name {
@@ -39,11 +39,14 @@ func (u *User) add(ver *VerifierData, idn *IdentityData) {
 			}
 			i++
 		}
+
 		if i == len(u.Verifiers) {
 			u.Identities = append(u.Identities, *idn)
 		} else {
 			u.Identities[i] = *idn
 		}
+	} else {
+		u.Identities = append(u.Identities, *idn)
 	}
 }
 
