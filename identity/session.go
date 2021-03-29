@@ -1,7 +1,7 @@
 package identity
 
 import (
-	"github.com/themakers/identity/cookie"
+	"github.com/skeris/identity/cookie"
 )
 
 type Session struct {

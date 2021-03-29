@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/themakers/identity/backend_mongo"
-	"github.com/themakers/identity/identity"
-	"github.com/themakers/identity/identity_email"
-	"github.com/themakers/identity/verifier_password"
-	"github.com/themakers/identity_svc_http"
+	"github.com/skeris/identity/backend_mongo"
+	"github.com/skeris/identity/identity"
+	"github.com/skeris/identity/identity_email"
+	"github.com/skeris/identity/verifier_password"
+	"github.com/skeris/identity_svc_http"
 	"net/http"
 	"strings"
 )

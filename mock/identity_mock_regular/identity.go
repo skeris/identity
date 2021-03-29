@@ -1,7 +1,7 @@
 package identity_mock_regular
 
 import (
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"strings"
 )
 

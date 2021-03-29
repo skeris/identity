@@ -2,7 +2,7 @@ package verifier_mock_oauth2
 
 import (
 	"context"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"golang.org/x/oauth2"
 )
 

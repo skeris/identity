@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"github.com/pquerna/otp/totp"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"image/png"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 	"crypto/rand"
 	"fmt"
-	"github.com/themakers/identity/identity"
-	"github.com/themakers/identity/identity_phone"
+	"github.com/skeris/identity/identity"
+	"github.com/skeris/identity/identity_phone"
 )
 
 type SenderFunc func(ctx context.Context, phone, code string, flash bool) error

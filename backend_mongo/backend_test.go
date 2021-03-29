@@ -2,8 +2,8 @@ package backend_mongo
 
 import (
 	"context"
-	"github.com/themakers/identity/backend_test"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/backend_test"
+	"github.com/skeris/identity/identity"
 	"testing"
 )
 

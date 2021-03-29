@@ -3,7 +3,7 @@ package verifier_password
 import (
 	"context"
 	"crypto/rand"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"golang.org/x/crypto/scrypt"
 )
 

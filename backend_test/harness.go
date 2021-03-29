@@ -3,7 +3,7 @@ package backend_test
 import (
 	"context"
 	. "github.com/smartystreets/goconvey/convey"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"testing"
 	"time"
 )

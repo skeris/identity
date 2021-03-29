@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/odnoklassniki"
 	"io/ioutil"

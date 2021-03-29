@@ -4,8 +4,8 @@ import (
 	"context"
 	"crypto/rand"
 	"fmt"
-	"github.com/themakers/identity/identity"
-	"github.com/themakers/identity/identity_email"
+	"github.com/skeris/identity/identity"
+	"github.com/skeris/identity/identity_email"
 )
 
 type SenderFunc func(ctx context.Context, email, code string) error

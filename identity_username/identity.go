@@ -2,7 +2,7 @@ package identity_phone
 
 import (
 	"errors"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"strings"
 	"unicode"
 )

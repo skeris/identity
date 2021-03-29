@@ -3,7 +3,7 @@ package verifier_facebook
 import (
 	"context"
 	"errors"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
 	"io/ioutil"

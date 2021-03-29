@@ -2,7 +2,7 @@ package identity_email
 
 import (
 	"errors"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 	"regexp"
 	"strings"
 )

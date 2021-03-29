@@ -2,7 +2,7 @@ package backend_redis
 
 import (
 	"context"
-	"github.com/themakers/identity/identity"
+	"github.com/skeris/identity/identity"
 )
 
 type Options struct {

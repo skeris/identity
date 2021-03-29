@@ -7,20 +7,20 @@ TheMakers.Identity package provide a both inline and standalone service solution
 
 - golang => 1.10
 - mongodb => 4.0
-- github.com/themakers/identity_svc_http
+- github.com/skeris/identity_svc_http
 
 ## Install
 
 Just pull sources to your library
 
 ```go
-go get github.com/themakers/identity
+go get github.com/skeris/identity
 ```
 
 And import it 
 
 ```go
-import "github.com/themakers/identity"
+import "github.com/skeris/identity"
 ```
 
 ## QuickStart
@@ -35,11 +35,11 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/themakers/identity/backend_mongo"
-    "github.com/themakers/identity/identity"
-    "github.com/themakers/identity/identity_email"
-    "github.com/themakers/identity/verifier_password"
-    "github.com/themakers/identity_svc_http"
+    "github.com/skeris/identity/backend_mongo"
+    "github.com/skeris/identity/identity"
+    "github.com/skeris/identity/identity_email"
+    "github.com/skeris/identity/verifier_password"
+    "github.com/skeris/identity_svc_http"
     "net/http"
     "strings"
 )
@@ -192,4 +192,4 @@ Now you can send your auth requests to the endpoint http://localhost:8080/identi
 
 ## API
 
-You could use https://github.com/themakers/identity_svc_grpc/blob/master/identity_svc_test.go  as an example.
+You could use https://github.com/skeris/identity_svc_grpc/blob/master/identity_svc_test.go  as an example.

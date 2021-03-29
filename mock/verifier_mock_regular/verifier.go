@@ -2,8 +2,8 @@ package verifier_mock_regular
 
 import (
 	"context"
-	"github.com/themakers/identity/identity"
-	"github.com/themakers/identity/mock/identity_mock_regular"
+	"github.com/skeris/identity/identity"
+	"github.com/skeris/identity/mock/identity_mock_regular"
 	"math/rand"
 	"strconv"
 )
