@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"time"
 )
 
 const (
@@ -96,6 +97,7 @@ func (b *Backend) CreateAuthentication(ctx context.Context, id string, objective
 		UserID:               userID,
 		RequiredFactorsCount: 1,
 		Version:              1,
+		CreationTime:         time.Now().Unix(),
 	}
 	if _, err := b.coll(collAuthentications).InsertOne(ctx, auth); err != nil {
 		return nil, err
