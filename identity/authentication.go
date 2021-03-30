@@ -1,5 +1,7 @@
 package identity
 
+import "time"
+
 type AuthenticationObjective string
 
 const (
@@ -39,7 +41,7 @@ type Authentication struct {
 
 	Stages []*AuthenticationStage `bson:"Stages" json:"Stages"`
 
-	CreationTime int64 `bson:"CreationTime" json:"CreationTime"`
+	CreationTime time.Time `bson:"CreationTime" json:"CreationTime"`
 
 	Version int `bson:"Version" json:"Version"`
 }

@@ -97,7 +97,7 @@ func (b *Backend) CreateAuthentication(ctx context.Context, id string, objective
 		UserID:               userID,
 		RequiredFactorsCount: 1,
 		Version:              1,
-		CreationTime:         time.Now().Unix(),
+		CreationTime:         time.Now(),
 	}
 	if _, err := b.coll(collAuthentications).InsertOne(ctx, auth); err != nil {
 		return nil, err
