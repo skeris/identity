@@ -116,10 +116,11 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 	log.Println("#### VERIFY ####", verifierName, verificationCode, identityName, identity)
 
 	auth, err := sess.manager.backend.GetAuthentication(ctx, sess.cookie.GetSessionID())
+
 	if err != nil {
 		return err
 	}
-
+	log.Println("####VER,", auth.Stages)
 	if auth == nil {
 		return errors.New("authentication is invalid, please start again")
 	}
