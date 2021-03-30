@@ -117,13 +117,9 @@ func (sess *Session) staticVerify(ctx context.Context, ver *VerifierSummary, aut
 
 		return nil
 	case ObjectiveSignUp, ObjectiveAttach:
+		fmt.Println("ATATATATA ",auth.ID,"\n\n\n")
+		fmt.Println("ATATATATA ",auth.Stages,"\n\n\n")
 		stage := auth.findStage(ver.Name, "")
-
-		fmt.Println("ATATATATA ",ver,"\n\n\n")
-		fmt.Println("ATATATATA ",ver.internal,"\n\n\n")
-		fmt.Println("ATATATATA ",ver.internal.staticRef,"\n\n\n")
-		fmt.Println("ATATATATA ",stage,"\n\n\n")
-		fmt.Println("ATATATATA ",*stage.VerifierData,"\n\n\n")
 
 		if err := ver.internal.staticRef.StaticVerify(ctx, *stage.VerifierData, inputCode); err != nil {
 			return err
