@@ -113,7 +113,7 @@ func (sess *Session) Start(ctx context.Context, verifierName string, args M, ide
 ////
 
 func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode, identityName, identity string) error {
-	log.Println("#### VERIFY ####", verifierName, verificationCode, identityName, identity)
+	log.Println("#### VERIFY ####", verifierName, verificationCode, identityName, identity,sess.cookie.GetSessionID())
 
 	auth, err := sess.manager.backend.GetAuthentication(ctx, sess.cookie.GetSessionID())
 
