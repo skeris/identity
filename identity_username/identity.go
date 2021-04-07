@@ -1,4 +1,4 @@
-package identity_phone
+package identity_username
 
 import (
 	"errors"
@@ -23,12 +23,12 @@ func (idn *Identity) Info() identity.IdentityInfo {
 	}
 }
 
-func (idn *Identity) NormalizeAndValidateData(identity string) (string, error) {
-	for _, c := range identity {
+func (i *Identity) NormalizeAndValidateIdentity(idn string) (idnNormalized string, err error) {
+	for _, c := range idn {
 		if !unicode.IsDigit(c) || !unicode.IsLetter(c) {
 			return "", errors.New("invalid characters in username")
 		}
 	}
-	return strings.ToLower(identity), nil
+	return strings.ToLower(idn), nil
 
 }
