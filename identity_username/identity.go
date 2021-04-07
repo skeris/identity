@@ -1,10 +1,10 @@
 package identity_username
 
 import (
-	"errors"
+	//"errors"
 	"github.com/skeris/identity/identity"
 	"strings"
-	"unicode"
+	//"unicode"
 )
 
 var _ identity.Identity = new(Identity)
