@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	e "github.com/skeris/identity/errors"
 )
 
 func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth *Authentication, args M, identityName, identity string) (M, error) {
@@ -22,7 +23,7 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 		if user, err := sess.manager.backend.GetUserByIdentity(ctx, identityName, identity); err != nil {
 			return nil, err
 		} else if user != nil {
-			return nil, errors.New("user with such identity already exists")
+			return nil, e.ErrorAlreadyRegistered{}
 		}
 
 		stage.IdentityName = identityName
@@ -119,9 +120,16 @@ func (sess *Session) staticVerify(ctx context.Context, ver *VerifierSummary, aut
 	case ObjectiveSignUp, ObjectiveAttach:
 		fmt.Println("ATATATATA ",auth.ID,"\n\n\n")
 		fmt.Println("ATATATATA ",auth.Stages,"\n\n\n")
-		stage := auth.findStage(ver.Name, "")
+		stage := auth.findStage(ver.Name, identityName)
+		if stage == nil {
+			return e.ErrorNoStage{}
+		}
 
-		if err := ver.internal.staticRef.StaticVerify(ctx, *stage.VerifierData, inputCode); err != nil {
+		if err := ver.internal.staticRef.StaticVerify(
+			ctx,
+			*stage.VerifierData,
+			inputCode,
+			); err != nil {
 			return err
 		}
 
