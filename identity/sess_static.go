@@ -53,7 +53,11 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 		{
 			// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//> Forbid non-standalone identities
-			fmt.Println("ORA", )
+			fmt.Println("ORA", identityName)
+			fmt.Println("ORA1", sess)
+			fmt.Println("ORA2", sess.manager)
+			fmt.Println("ORA3", sess.manager.identities)
+			fmt.Println("ORA4", sess.manager.identities[identityName])
 			if identityName != "" && !sess.manager.identities[identityName].Standalone {
 				return nil, errors.New("could not combine static verifier and non-standalone identity in same stage")
 			}
