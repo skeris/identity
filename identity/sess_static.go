@@ -50,8 +50,10 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 			panic("shit happened")
 		}
 
-		{ // FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		{
+			// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//> Forbid non-standalone identities
+			fmt.Println("ORA", )
 			if identityName != "" && !sess.manager.identities[identityName].Standalone {
 				return nil, errors.New("could not combine static verifier and non-standalone identity in same stage")
 			}
@@ -120,7 +122,7 @@ func (sess *Session) staticVerify(ctx context.Context, ver *VerifierSummary, aut
 	case ObjectiveSignUp, ObjectiveAttach:
 		fmt.Println("ATATATATA ",auth.ID,"\n\n\n")
 		fmt.Println("ATATATATA ",auth.Stages,"\n\n\n")
-		stage := auth.findStage(ver.Name, identityName)
+		stage := auth.findStage(ver.Name, "")
 		if stage == nil {
 			return e.ErrorNoStage{}
 		}
