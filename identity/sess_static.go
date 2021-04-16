@@ -3,7 +3,6 @@ package identity
 import (
 	"context"
 	"errors"
-	"fmt"
 	e "github.com/skeris/identity/errors"
 )
 
@@ -26,7 +25,6 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 			return nil, e.ErrorAlreadyRegistered{}
 		}
 
-		stage.IdentityName = identityName
 		stage.Identity = identity
 	}
 
@@ -50,13 +48,13 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 			panic("shit happened")
 		}
 
-		{
-			// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//> Forbid non-standalone identities
-			if identityName != "" && !sess.manager.identities[identityName].Standalone {
-				return nil, errors.New("could not combine static verifier and non-standalone identity in same stage")
-			}
-		}
+		//{
+		//	// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//	//> Forbid non-standalone identities
+		//	if identityName != "" && !sess.manager.identities[identityName].Standalone {
+		//		return nil, errors.New("could not combine static verifier and non-standalone identity in same stage")
+		//	}
+		//}
 
 		auth.addStage(stage)
 
@@ -119,8 +117,6 @@ func (sess *Session) staticVerify(ctx context.Context, ver *VerifierSummary, aut
 
 		return nil
 	case ObjectiveSignUp, ObjectiveAttach:
-		fmt.Println("ATATATATA ",auth.ID,"\n\n\n")
-		fmt.Println("ATATATATA ",auth.Stages,"\n\n\n")
 		stage := auth.findStage(ver.Name, "")
 		if stage == nil {
 			return e.ErrorNoStage{}

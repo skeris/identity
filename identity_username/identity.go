@@ -1,9 +1,12 @@
 package identity_username
 
 import (
+	"errors"
 	//"errors"
 	"github.com/skeris/identity/identity"
 	"strings"
+	"unicode"
+
 	//"unicode"
 )
 
@@ -24,11 +27,11 @@ func (idn *Identity) Info() identity.IdentityInfo {
 }
 
 func (i *Identity) NormalizeAndValidateIdentity(idn string) (idnNormalized string, err error) {
-	//for _, c := range idn {
-	//	if !unicode.IsDigit(c) || !unicode.IsLetter(c) {
-	//		return "", errors.New("invalid characters in username")
-	//	}
-	//}
+	for _, c := range idn {
+		if !unicode.IsDigit(c) || !unicode.IsLetter(c) {
+			return "", errors.New("invalid characters in username")
+		}
+	}
 	return strings.ToLower(idn), nil
 
 }

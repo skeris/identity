@@ -58,8 +58,8 @@ func (sess *Session) Start(ctx context.Context, verifierName string, args M, ide
 	// TODO: auth nil check
 	log.Println("#### START ####", verifierName, args, identityName, identity, sess.cookie.GetSessionID())
 
-	if verifierName == "" {
-	}
+	//if verifierName == "" {
+	//}
 	auth, err := sess.manager.backend.GetAuthentication(ctx, sess.cookie.GetSessionID())
 	if err != nil {
 		return nil, err
