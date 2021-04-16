@@ -3,6 +3,8 @@ package identity
 import (
 	"context"
 	"errors"
+	"github.com/skeris/authService/hlogged"
+	"github.com/themakers/hlog"
 	"golang.org/x/oauth2"
 	"log"
 )
@@ -112,7 +114,7 @@ func (sess *Session) Start(ctx context.Context, verifierName string, args M, ide
 //// VERIFY
 ////
 
-func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode, identityName, identity string) error {
+func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode, identityName, identity string, logger hlog.Logger) error {
 	log.Println("#### VERIFY ####", verifierName, verificationCode, identityName, identity,sess.cookie.GetSessionID())
 
 	auth, err := sess.manager.backend.GetAuthentication(ctx, sess.cookie.GetSessionID())
@@ -122,6 +124,24 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 	}
 	if auth == nil {
 		return errors.New("authentication is invalid, please start again")
+	}
+
+	switch auth.Objective {
+	case ObjectiveSignUp:
+		logger.Emit(hlogged.InfoUserSignUp{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			KeyVerifier:     verifierName,
+		})
+		break
+	case ObjectiveSignIn:
+		logger.Emit(hlogged.InfoUserSignIn{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			CtxUser:         auth.UserID,
+			KeyVerifier:     verifierName,
+		})
+		break
 	}
 
 	ver := sess.manager.verifiers[verifierName]
