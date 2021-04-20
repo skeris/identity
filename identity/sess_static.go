@@ -21,7 +21,7 @@ func (sess *Session) staticStart(ctx context.Context, ver *VerifierSummary, auth
 	if identityName != "" {
 		if user, err := sess.manager.backend.GetUserByIdentity(ctx, identityName, identity); err != nil {
 			return nil, err
-		} else if user != nil {
+		} else if user != nil && auth.Objective == ObjectiveAttach {
 			return nil, e.ErrorAlreadyRegistered{}
 		}
 
