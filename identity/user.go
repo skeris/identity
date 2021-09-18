@@ -34,7 +34,7 @@ func (u *User) add(ver *VerifierData, idn *IdentityData) {
 	if len(u.Identities) != 0 {
 		for i < len(u.Verifiers) {
 			id := u.Identities[i]
-			if id.Identity == idn.Identity && id.Name == idn.Name {
+			if id.Name == idn.Name {
 				break
 			}
 			i++
