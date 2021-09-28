@@ -142,6 +142,19 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 			CtxForwardedIP: headers["forwardedIP"],
 		})
 		break
+	case ObjectiveAttach:
+		logger.Emit(hlogged.InfoUserAttach{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			KeyVerifier:     verifierName,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["fingerprint"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
+		})
+		break
 	case ObjectiveSignIn:
 		_, uid := sess.Info()
 		logger.Emit(hlogged.InfoUserSignIn{
