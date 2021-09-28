@@ -126,20 +126,35 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 		return errors.New("authentication is invalid, please start again")
 	}
 
+	headers := ctx.Value("headers").(map[string]string)
+
 	switch auth.Objective {
 	case ObjectiveSignUp:
 		logger.Emit(hlogged.InfoUserSignUp{
 			CtxIdentity:     identity,
 			KeyIdentityName: identityName,
 			KeyVerifier:     verifierName,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["fingerprint"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
 		})
 		break
 	case ObjectiveSignIn:
+		_, uid := sess.Info()
 		logger.Emit(hlogged.InfoUserSignIn{
 			CtxIdentity:     identity,
 			KeyIdentityName: identityName,
-			CtxUser:         auth.UserID,
+			CtxUser:         uid,
 			KeyVerifier:     verifierName,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["fingerprint"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
 		})
 		break
 	}
