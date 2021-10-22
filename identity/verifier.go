@@ -126,51 +126,6 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 		return errors.New("authentication is invalid, please start again")
 	}
 
-	headers := ctx.Value("headers").(map[string]string)
-
-	switch auth.Objective {
-	case ObjectiveSignUp:
-		logger.Emit(hlogged.InfoUserSignUp{
-			CtxIdentity:     identity,
-			KeyIdentityName: identityName,
-			KeyVerifier:     verifierName,
-
-			CtxPartner: headers["partner"],
-			CtxFingerprint: headers["fingerprint"],
-			CtxLink: headers["link"],
-			CtxRealIP: headers["originalIP"],
-			CtxForwardedIP: headers["forwardedIP"],
-		})
-		break
-	case ObjectiveAttach:
-		logger.Emit(hlogged.InfoUserAttach{
-			CtxIdentity:     identity,
-			KeyIdentityName: identityName,
-			KeyVerifier:     verifierName,
-
-			CtxPartner: headers["partner"],
-			CtxFingerprint: headers["fingerprint"],
-			CtxLink: headers["link"],
-			CtxRealIP: headers["originalIP"],
-			CtxForwardedIP: headers["forwardedIP"],
-		})
-		break
-	case ObjectiveSignIn:
-		_, uid := sess.Info()
-		logger.Emit(hlogged.InfoUserSignIn{
-			CtxIdentity:     identity,
-			KeyIdentityName: identityName,
-			CtxUser:         uid,
-			KeyVerifier:     verifierName,
-
-			CtxPartner: headers["partner"],
-			CtxFingerprint: headers["fingerprint"],
-			CtxLink: headers["link"],
-			CtxRealIP: headers["originalIP"],
-			CtxForwardedIP: headers["forwardedIP"],
-		})
-		break
-	}
 
 	ver := sess.manager.verifiers[verifierName]
 
@@ -216,5 +171,55 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 		return err
 	}
 
+	headers := ctx.Value("headers").(map[string]string)
+
+	_, uid := sess.Info()
+	switch auth.Objective {
+	case ObjectiveSignUp:
+		logger.Emit(hlogged.InfoUserSignUp{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			KeyVerifier:     verifierName,
+			CtxUser:         uid,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["ShortFP"],
+			CtxDevice: headers["LongFP"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
+		})
+		break
+	case ObjectiveAttach:
+		logger.Emit(hlogged.InfoUserAttach{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			KeyVerifier:     verifierName,
+			CtxUser:         uid,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["ShortFP"],
+			CtxDevice: headers["LongFP"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
+		})
+		break
+	case ObjectiveSignIn:
+		logger.Emit(hlogged.InfoUserSignIn{
+			CtxIdentity:     identity,
+			KeyIdentityName: identityName,
+			CtxUser:         uid,
+			KeyVerifier:     verifierName,
+
+			CtxPartner: headers["partner"],
+			CtxFingerprint: headers["ShortFP"],
+			CtxDevice: headers["LongFP"],
+			CtxLink: headers["link"],
+			CtxRealIP: headers["originalIP"],
+			CtxForwardedIP: headers["forwardedIP"],
+		})
+		break
+	}
 	return nil
 }
