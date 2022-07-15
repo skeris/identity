@@ -3,10 +3,12 @@ package identity
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/skeris/authService/hlogged"
 	"github.com/themakers/hlog"
 	"golang.org/x/oauth2"
 	"log"
+	"strings"
 )
 
 ////////////////////////////////////////////////////////////////
@@ -189,6 +191,22 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 			CtxRealIP: headers["originalIP"],
 			CtxForwardedIP: headers["forwardedIP"],
 		})
+		go func() {
+			defer func() {
+				if r := recover(); v != nil {
+					fmt.Println("panic utm", v)
+				}
+			}()
+			for k, co := range headers {
+				if strings.HasPrefix(k, "utm_") {
+					logger.Emit(hlogged.InfoUTM{
+						CtxUser:   uid,
+						CtxSignal: k,
+						CtxNode:   co,
+					})
+				}
+			}
+		}()
 		break
 	case ObjectiveAttach:
 		logger.Emit(hlogged.InfoUserAttach{
