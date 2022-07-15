@@ -193,7 +193,7 @@ func (sess *Session) Verify(ctx context.Context, verifierName, verificationCode,
 		})
 		go func() {
 			defer func() {
-				if r := recover(); v != nil {
+				if v := recover(); v != nil {
 					fmt.Println("panic utm", v)
 				}
 			}()
